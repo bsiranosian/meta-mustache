@@ -1,0 +1,10 @@
+# getting SRR number from the ids
+cd ~/bhatt_local/meta-mustache/ncbi_webpages
+
+
+echo -n > id_to_srr.txt
+for i in $(cat ../ecoli_cipro_all_ids.txt) ; do echo -e $i "\t" $(wget -O - -o /dev/null "https://www.ncbi.nlm.nih.gov/sra?LinkName=biosample_sra&from_uid="$i | grep -e SRR -e PAIRED -e ILLUMINA |grep -o SRR....... | uniq) >> id_to_srr.txt ; done
+
+for i in $(ls *_SRR.txt); do echo $i $(grep -o SRR....... $i | uniq); done
+
+

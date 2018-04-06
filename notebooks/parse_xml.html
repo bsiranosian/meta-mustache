@@ -11773,10 +11773,11 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[341]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># imports </span>
+<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -11789,10 +11790,35 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get xml file here: https://www.ncbi.nlm.nih.gov/biosample/?term=antibiogram%5bfilter%5d</span>
+<span class="n">xmlfile</span> <span class="o">=</span> <span class="s1">&#39;/home/ben/bhatt_local/meta-mustache/biosample_result.xml&#39;</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">xmlfile</span><span class="p">)</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;/home/ben/Downloads/biosample_result.xml&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># testing xml stuff... </span>
+<span class="k">if</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]:</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="n">child</span><span class="o">.</span><span class="n">attrib</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s1">&#39;Table&#39;</span><span class="p">):</span>
+        <span class="n">xmltable_to_df</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s1">&#39;Header&#39;</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">j</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11802,24 +11828,12 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[125]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">root</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]:</span>
-    <span class="nb">print</span> <span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="n">child</span><span class="o">.</span><span class="n">attrib</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
 </pre></div>
 
 </div>
@@ -11836,16 +11850,9 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>BioSample {&#39;access&#39;: &#39;public&#39;, &#39;publication_date&#39;: &#39;2017-06-21T00:00:00.000&#39;, &#39;last_update&#39;: &#39;2018-04-03T09:38:11.570&#39;, &#39;submission_date&#39;: &#39;2017-06-21T15:39:02.883&#39;, &#39;id&#39;: &#39;7265011&#39;, &#39;accession&#39;: &#39;SAMN07265011&#39;}
-BioSample {&#39;access&#39;: &#39;public&#39;, &#39;publication_date&#39;: &#39;2016-06-01T00:00:00.000&#39;, &#39;last_update&#39;: &#39;2018-04-03T11:25:04.428&#39;, &#39;submission_date&#39;: &#39;2016-06-01T10:52:04.893&#39;, &#39;id&#39;: &#39;5194390&#39;, &#39;accession&#39;: &#39;SAMN05194390&#39;}
-BioSample {&#39;access&#39;: &#39;public&#39;, &#39;publication_date&#39;: &#39;2016-06-01T00:00:00.000&#39;, &#39;last_update&#39;: &#39;2018-04-03T11:25:04.379&#39;, &#39;submission_date&#39;: &#39;2016-06-01T10:52:04.443&#39;, &#39;id&#39;: &#39;5194389&#39;, &#39;accession&#39;: &#39;SAMN05194389&#39;}
-BioSample {&#39;access&#39;: &#39;public&#39;, &#39;publication_date&#39;: &#39;2016-07-01T00:00:00.000&#39;, &#39;last_update&#39;: &#39;2018-04-03T11:25:04.327&#39;, &#39;submission_date&#39;: &#39;2016-04-07T14:29:02.000&#39;, &#39;id&#39;: &#39;4622917&#39;, &#39;accession&#39;: &#39;SAMN04622917&#39;}
-BioSample {&#39;access&#39;: &#39;public&#39;, &#39;publication_date&#39;: &#39;2016-02-04T00:00:00.000&#39;, &#39;last_update&#39;: &#39;2018-04-03T11:25:04.222&#39;, &#39;submission_date&#39;: &#39;2016-02-04T10:07:05.000&#39;, &#39;id&#39;: &#39;4456586&#39;, &#39;accession&#39;: &#39;SAMN04456586&#39;}
-BioSample {&#39;access&#39;: &#39;public&#39;, &#39;publication_date&#39;: &#39;2016-01-08T00:00:00.000&#39;, &#39;last_update&#39;: &#39;2018-04-03T11:30:03.623&#39;, &#39;submission_date&#39;: &#39;2016-01-08T17:41:05.000&#39;, &#39;id&#39;: &#39;4393397&#39;, &#39;accession&#39;: &#39;SAMN04393397&#39;}
-BioSample {&#39;access&#39;: &#39;public&#39;, &#39;publication_date&#39;: &#39;2015-09-29T00:00:00.000&#39;, &#39;last_update&#39;: &#39;2018-04-03T11:25:22.186&#39;, &#39;submission_date&#39;: &#39;2015-09-29T14:43:35.000&#39;, &#39;id&#39;: &#39;4122808&#39;, &#39;accession&#39;: &#39;SAMN04122808&#39;}
-BioSample {&#39;access&#39;: &#39;public&#39;, &#39;publication_date&#39;: &#39;2015-08-31T00:00:00.000&#39;, &#39;last_update&#39;: &#39;2018-04-03T11:35:04.761&#39;, &#39;submission_date&#39;: &#39;2015-08-31T16:51:07.000&#39;, &#39;id&#39;: &#39;4022954&#39;, &#39;accession&#39;: &#39;SAMN04022954&#39;}
-BioSample {&#39;access&#39;: &#39;public&#39;, &#39;publication_date&#39;: &#39;2018-03-19T00:00:00.000&#39;, &#39;last_update&#39;: &#39;2018-03-19T11:01:19.513&#39;, &#39;submission_date&#39;: &#39;2018-03-19T10:39:02.947&#39;, &#39;id&#39;: &#39;8731979&#39;, &#39;accession&#39;: &#39;SAMN08731979&#39;}
-BioSample {&#39;access&#39;: &#39;public&#39;, &#39;publication_date&#39;: &#39;2018-03-19T00:00:00.000&#39;, &#39;last_update&#39;: &#39;2018-03-19T11:01:18.647&#39;, &#39;submission_date&#39;: &#39;2018-03-19T10:39:02.907&#39;, &#39;id&#39;: &#39;8731978&#39;, &#39;accession&#39;: &#39;SAMN08731978&#39;}
+<pre>Id [&#39;BioSample&#39;, &#39;1&#39;]
+Id [&#39;Sample name&#39;]
+Id [&#39;SRA&#39;]
 </pre>
 </div>
 </div>
@@ -11856,11 +11863,98 @@ BioSample {&#39;access&#39;: &#39;public&#39;, &#39;publication_date&#39;: &#39;
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[148]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-    <span class="nb">print</span> <span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="n">child</span><span class="o">.</span><span class="n">attrib</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">parse_ncbi_xml</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;return a tabel form parsing the xml file from NCBI</span>
+<span class="sd">    Each row of the table is an enry about resistance to antibiotics</span>
+<span class="sd">    for a particular organism</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">ii</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">bigdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">root</span><span class="p">:</span>
+        <span class="c1"># basic sample information </span>
+        <span class="n">sample_id</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+        <span class="n">sample_title</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">taxonomy_name</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;taxonomy_name&#39;</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">organism_name</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="n">organism_name</span> <span class="o">=</span> <span class="s1">&#39;NA&#39;</span>
+        <span class="c1"># check for sequencing data</span>
+        <span class="n">has_sra</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="s1">&#39;SRA&#39;</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+                <span class="n">has_sra</span> <span class="o">=</span><span class="kc">True</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">comment_text</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;Paragraph&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="n">comment_text</span> <span class="o">=</span> <span class="s1">&#39;NA&#39;</span>
+        <span class="k">if</span> <span class="n">has_sra</span><span class="p">:</span>
+            <span class="c1"># add this to each row</span>
+            <span class="n">add_extra</span> <span class="o">=</span> <span class="p">[</span><span class="n">sample_id</span><span class="p">,</span> <span class="n">sample_title</span><span class="p">,</span> <span class="n">taxonomy_name</span><span class="p">,</span> <span class="n">organism_name</span><span class="p">,</span> <span class="n">comment_text</span><span class="p">]</span>
+            <span class="n">add_extra_header</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sample_id&#39;</span><span class="p">,</span> <span class="s1">&#39;sample_title&#39;</span><span class="p">,</span> <span class="s1">&#39;taxonomy_name&#39;</span><span class="p">,</span> <span class="s1">&#39;organism_name&#39;</span><span class="p">,</span> <span class="s1">&#39;comment_text&#39;</span><span class="p">]</span>
+            <span class="c1"># get resistance table</span>
+            <span class="n">table</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;Table&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">table_title</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span>
+            <span class="n">table_header</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;Header&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getchildren</span><span class="p">()]</span> <span class="o">+</span> <span class="n">add_extra_header</span>
+            <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;Body&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getchildren</span><span class="p">()]</span>
+            <span class="n">table_text</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+                <span class="n">row_text</span> <span class="o">=</span> <span class="p">[</span><span class="n">cell</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">getchildren</span><span class="p">()]</span> <span class="o">+</span> <span class="n">add_extra</span>
+                <span class="n">table_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row_text</span><span class="p">)</span>
+            <span class="n">table_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">table_text</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">table_header</span><span class="p">)</span>
+
+            <span class="c1"># standardize the columns in this </span>
+            <span class="c1"># we want the Antibiotic, Resistance phenotype, Measurement, Measurement sign, Measurement units</span>
+            <span class="c1"># columns. If theres not that, put NA</span>
+            <span class="n">keep_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Antibiotic&#39;</span><span class="p">,</span> <span class="s1">&#39;Resistance phenotype&#39;</span><span class="p">,</span> <span class="s1">&#39;Measurement&#39;</span><span class="p">,</span> <span class="s1">&#39;Measurement sign&#39;</span><span class="p">,</span> <span class="s1">&#39;Measurement units&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">add_extra_header</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keep_columns</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">table_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                    <span class="n">table_df</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;NA&#39;</span>
+            <span class="n">table_df</span> <span class="o">=</span> <span class="n">table_df</span><span class="p">[</span><span class="n">keep_columns</span><span class="p">]</span>
+            <span class="c1"># add other info to the table</span>
+    <span class="c1">#         table_df[&#39;sample_id&#39;]= sample_id</span>
+    <span class="c1">#         table_df[&#39;sample_title&#39;]= sample_title</span>
+    <span class="c1">#         table_df[&#39;taxonomy_name&#39;]= taxonomy_name</span>
+    <span class="c1">#         table_df[&#39;organism_name&#39;]= organism_name</span>
+            <span class="n">bigdf</span> <span class="o">=</span> <span class="n">bigdf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">table_df</span><span class="p">)</span>
+        <span class="n">ii</span> <span class="o">+=</span><span class="mi">1</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">bigdf</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[149]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get this big table</span>
+<span class="n">bigdf</span> <span class="o">=</span> <span class="n">parse_ncbi_xml</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[150]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">bigdf</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="c1"># rename the columns</span>
+<span class="n">bigdf</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antibiotic&#39;</span><span class="p">,</span> <span class="s1">&#39;resistance_phenotype&#39;</span><span class="p">,</span> <span class="s1">&#39;measurement&#39;</span><span class="p">,</span> <span class="s1">&#39;measurement_sign&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;measurement_units&#39;</span><span class="p">,</span> <span class="s1">&#39;sample_id&#39;</span><span class="p">,</span> <span class="s1">&#39;sample_title&#39;</span><span class="p">,</span> <span class="s1">&#39;taxonomy_name&#39;</span><span class="p">,</span> <span class="s1">&#39;organism_name&#39;</span><span class="p">,</span> <span class="s1">&#39;comment_text&#39;</span><span class="p">]</span>
+        
+<span class="n">bigdf</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;/home/ben/bhatt_local/meta-mustache/resistance_table.pickle&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11877,14 +11971,7 @@ BioSample {&#39;access&#39;: &#39;public&#39;, &#39;publication_date&#39;: &#39;
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Ids {}
-Description {}
-Owner {}
-Models {}
-Package {&#39;display_name&#39;: &#39;Pathogen: clinical or host-associated; version 1.0&#39;}
-Attributes {}
-Links {}
-Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:02.886&#39;}
+<pre>(76318, 10)
 </pre>
 </div>
 </div>
@@ -11895,76 +11982,11 @@ Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[151]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">attrib</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[25]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>{&#39;taxonomy_id&#39;: &#39;573&#39;, &#39;taxonomy_name&#39;: &#39;Klebsiella pneumoniae&#39;}</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">text</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[19]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;Pathogen: clinical or host-associated sample from Klebsiella pneumoniae&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>root.get<span class="o">?</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bigdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;/home/ben/bhatt_local/meta-mustache/resistance_table.pickle&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bigdf</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11980,15 +12002,10 @@ Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:
 <div class="prompt"></div>
 
 
-
-
-<div class="output_text output_subarea ">
-<pre><span class="ansi-red-fg">Signature:</span> root<span class="ansi-blue-fg">.</span>get<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">,</span> default<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-red-fg">Docstring:</span> &lt;no docstring&gt;
-<span class="ansi-red-fg">Type:</span>      builtin_function_or_method
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(76318, 10)
 </pre>
 </div>
-
 </div>
 
 </div>
@@ -11997,31 +12014,97 @@ Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[152]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s1">&#39;Organism&#39;</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;taxonomy_name&#39;</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">antibiotic_freq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">bigdf</span><span class="o">.</span><span class="n">antibiotic</span><span class="p">,</span> <span class="s1">&#39;antibiotic&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;antibiotic&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">antibiotic_freq</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[152]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>col_0</th>
+      <th>antibiotic</th>
+    </tr>
+    <tr>
+      <th>antibiotic</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ciprofloxacin</th>
+      <td>4247</td>
+    </tr>
+    <tr>
+      <th>gentamicin</th>
+      <td>4099</td>
+    </tr>
+    <tr>
+      <th>ceftriaxone</th>
+      <td>3748</td>
+    </tr>
+    <tr>
+      <th>trimethoprim-sulfamethoxazole</th>
+      <td>3698</td>
+    </tr>
+    <tr>
+      <th>tetracycline</th>
+      <td>3445</td>
+    </tr>
+    <tr>
+      <th>ampicillin</th>
+      <td>3066</td>
+    </tr>
+    <tr>
+      <th>amikacin</th>
+      <td>2705</td>
+    </tr>
+    <tr>
+      <th>cefoxitin</th>
+      <td>2693</td>
+    </tr>
+    <tr>
+      <th>streptomycin</th>
+      <td>2560</td>
+    </tr>
+  </tbody>
+</table>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s1">&#39;Table&#39;</span><span class="p">):</span>
-    <span class="n">xmltable_to_df</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s1">&#39;Header&#39;</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">j</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-</pre></div>
+</div>
 
 </div>
+
 </div>
 </div>
 
@@ -12031,628 +12114,8 @@ Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:
 <div class="prompt input_prompt">In&nbsp;[153]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">root</span><span class="p">[</span><span class="mi">42</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]:</span>
-    <span class="nb">print</span> <span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="n">child</span><span class="o">.</span><span class="n">attrib</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Table {&#39;class&#39;: &#39;Antibiogram.mycobacterial.1.0&#39;}
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[154]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">atable</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[155]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">table_header</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">atable</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;Header&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getchildren</span><span class="p">()]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">table_header</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[&#39;Antibiotic&#39;, &#39;Resistance phenotype&#39;, &#39;DST Media&#39;, &#39;DST Method&#39;, &#39;Critical Concentration&#39;, &#39;Testing standard&#39;]
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[156]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">atable</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;Body&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getchildren</span><span class="p">()]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[157]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">table_text</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
-    <span class="n">row_text</span> <span class="o">=</span> <span class="p">[</span><span class="n">cell</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">getchildren</span><span class="p">()]</span>
-    <span class="n">table_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row_text</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[158]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">table_text</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[158]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[[&#39;ethambutol&#39;, &#39;susceptible&#39;, &#39;liquid&#39;, &#39;MGIT960&#39;, &#39;5&#39;, &#39;CLSI&#39;],
- [&#39;isoniazid&#39;, &#39;susceptible&#39;, &#39;liquid&#39;, &#39;MGIT960&#39;, &#39;0.1&#39;, &#39;CLSI&#39;],
- [&#39;rifampin&#39;, &#39;susceptible&#39;, &#39;liquid&#39;, &#39;MGIT960&#39;, &#39;1&#39;, &#39;CLSI&#39;]]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[159]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">table_text</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">table_header</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[160]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[160]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Antibiotic</th>
-      <th>Resistance phenotype</th>
-      <th>DST Media</th>
-      <th>DST Method</th>
-      <th>Critical Concentration</th>
-      <th>Testing standard</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>ethambutol</td>
-      <td>susceptible</td>
-      <td>liquid</td>
-      <td>MGIT960</td>
-      <td>5</td>
-      <td>CLSI</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>isoniazid</td>
-      <td>susceptible</td>
-      <td>liquid</td>
-      <td>MGIT960</td>
-      <td>0.1</td>
-      <td>CLSI</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>rifampin</td>
-      <td>susceptible</td>
-      <td>liquid</td>
-      <td>MGIT960</td>
-      <td>1</td>
-      <td>CLSI</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>streptomycin</td>
-      <td>susceptible</td>
-      <td>liquid</td>
-      <td>MGIT960</td>
-      <td>1</td>
-      <td>CLSI</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[253]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ii</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">sample_dict</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">root</span><span class="p">:</span>
-    <span class="n">sample_id</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-    <span class="n">sample_title</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
-    <span class="n">taxonomy_name</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;taxonomy_name&#39;</span><span class="p">]</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">organism_name</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
-    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-        <span class="n">organism_name</span> <span class="o">=</span> <span class="s1">&#39;NA&#39;</span>
-    <span class="n">table</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;Table&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="c1">#     if len(table) != 1:</span>
-<span class="c1">#         print(ii)</span>
-    <span class="n">table_title</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span>
-<span class="c1">#     print(str(ii))</span>
-<span class="c1">#     print(str(ii) + &#39; &#39; + sample_id + &#39; &#39; + sample_title + &#39; &#39; + table_title)</span>
-    
-    <span class="n">table_header</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;Header&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getchildren</span><span class="p">()]</span>
-    <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;Body&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getchildren</span><span class="p">()]</span>
-    <span class="n">table_text</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
-        <span class="n">row_text</span> <span class="o">=</span> <span class="p">[</span><span class="n">cell</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">getchildren</span><span class="p">()]</span>
-        <span class="n">table_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row_text</span><span class="p">)</span>
-<span class="c1">#     print(table_text)</span>
-<span class="c1">#     print(table_header)</span>
-    
-    <span class="n">table_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">table_text</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">table_header</span><span class="p">)</span>
-    
-    <span class="n">sample_dict</span><span class="p">[</span><span class="n">sample_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">sample_id</span><span class="p">,</span> <span class="n">sample_title</span><span class="p">,</span> <span class="n">table_df</span><span class="p">,</span> <span class="n">taxonomy_name</span><span class="p">,</span> <span class="n">organism_name</span><span class="p">]</span>
-<span class="c1">#     print (str(ii) + &#39; &#39; + table.tag)</span>
-    
-<span class="c1">#     if (i[1][2][0].tag) != &#39;Table&#39;:</span>
-<span class="c1">#         print(str(ii) + &#39;  &#39; + i[1][0].text)</span>
-    <span class="n">ii</span> <span class="o">+=</span><span class="mi">1</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[190]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span>  <span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">sample_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
-<span class="c1"># any( ==&#39;amikacin&#39;)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[192]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">any</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">any</span> <span class="o">==</span><span class="s1">&#39;amikacin&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[192]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>False</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[196]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">any</span><span class="p">(</span><span class="n">d</span><span class="o">==</span><span class="s1">&#39;amikacin&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[196]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>True</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[199]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[199]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;Antibiotic&#39;,
- &#39;Resistance phenotype&#39;,
- &#39;Measurement sign&#39;,
- &#39;Measurement&#39;,
- &#39;Measurement units&#39;,
- &#39;Laboratory typing method&#39;,
- &#39;Laboratory typing platform&#39;,
- &#39;Vendor&#39;,
- &#39;Laboratory typing method version or reagent&#39;,
- &#39;Testing standard&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[214]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># column headers of data table</span>
-<span class="n">col_headers</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">sample_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())]</span>
-<span class="n">col_headers_unlist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">col_headers</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">])</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">col_headers_unlist</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;freq&#39;</span><span class="p">)</span>
-<span class="c1"># all have the Antibiotic column</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[214]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>col_0</th>
-      <th>freq</th>
-    </tr>
-    <tr>
-      <th>row_0</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Antibiotic</th>
-      <td>5691</td>
-    </tr>
-    <tr>
-      <th>Critical Concentration</th>
-      <td>1139</td>
-    </tr>
-    <tr>
-      <th>DST Media</th>
-      <td>1139</td>
-    </tr>
-    <tr>
-      <th>DST Method</th>
-      <td>1139</td>
-    </tr>
-    <tr>
-      <th>Laboratory typing method</th>
-      <td>4552</td>
-    </tr>
-    <tr>
-      <th>Laboratory typing method version or reagent</th>
-      <td>4552</td>
-    </tr>
-    <tr>
-      <th>Laboratory typing platform</th>
-      <td>4552</td>
-    </tr>
-    <tr>
-      <th>Measurement</th>
-      <td>4552</td>
-    </tr>
-    <tr>
-      <th>Measurement sign</th>
-      <td>4552</td>
-    </tr>
-    <tr>
-      <th>Measurement units</th>
-      <td>4552</td>
-    </tr>
-    <tr>
-      <th>Resistance phenotype</th>
-      <td>5691</td>
-    </tr>
-    <tr>
-      <th>Testing standard</th>
-      <td>5691</td>
-    </tr>
-    <tr>
-      <th>Vendor</th>
-      <td>4552</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[235]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">antibiotics</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s1">&#39;Antibiotic&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">sample_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())]</span>
-<span class="n">antibiotics_unlist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">antibiotics</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">])</span>
-<span class="n">antibiotics_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">antibiotics_unlist</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;freq&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;freq&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="c1"># top 5 occurances</span>
-<span class="n">antibiotics_table</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[235]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>col_0</th>
-      <th>freq</th>
-    </tr>
-    <tr>
-      <th>row_0</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>ciprofloxacin</th>
-      <td>4400</td>
-    </tr>
-    <tr>
-      <th>gentamicin</th>
-      <td>4290</td>
-    </tr>
-    <tr>
-      <th>ceftriaxone</th>
-      <td>3875</td>
-    </tr>
-    <tr>
-      <th>trimethoprim-sulfamethoxazole</th>
-      <td>3857</td>
-    </tr>
-    <tr>
-      <th>tetracycline</th>
-      <td>3584</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[236]:</div>
-<div class="inner_cell">
-    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># is carbapanem in this list?</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;carbapenem&#39;</span> <span class="ow">in</span> <span class="n">antibiotics_table</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;carbapenem&#39;</span> <span class="ow">in</span> <span class="n">antibiotic_freq</span><span class="p">)</span>
 <span class="c1"># NOPE</span>
 </pre></div>
 
@@ -12681,14 +12144,10 @@ Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[257]:</div>
+<div class="prompt input_prompt">In&nbsp;[154]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Which taxonomies are in this list</span>
-<span class="n">tax_names</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">sample_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())])</span>
-<span class="n">tax_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">tax_names</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;freq&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;freq&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="c1"># top occurances</span>
-<span class="n">tax_table</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bigdf</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;taxonomy_name&#39;</span><span class="p">)[</span><span class="s1">&#39;sample_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span>
 </pre></div>
 
 </div>
@@ -12701,285 +12160,23 @@ Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[257]:</div>
+<div class="prompt output_prompt">Out[154]:</div>
 
 
 
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>col_0</th>
-      <th>freq</th>
-    </tr>
-    <tr>
-      <th>row_0</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Mycobacterium tuberculosis</th>
-      <td>1490</td>
-    </tr>
-    <tr>
-      <th>Acinetobacter baumannii</th>
-      <td>963</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica</th>
-      <td>802</td>
-    </tr>
-    <tr>
-      <th>Escherichia coli</th>
-      <td>390</td>
-    </tr>
-    <tr>
-      <th>Streptococcus pneumoniae</th>
-      <td>318</td>
-    </tr>
-    <tr>
-      <th>Klebsiella pneumoniae</th>
-      <td>284</td>
-    </tr>
-    <tr>
-      <th>Pseudomonas aeruginosa</th>
-      <td>110</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Typhimurium var. 5-</th>
-      <td>91</td>
-    </tr>
-    <tr>
-      <th>Enterobacter cloacae</th>
-      <td>80</td>
-    </tr>
-    <tr>
-      <th>Acinetobacter pittii</th>
-      <td>76</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Kentucky</th>
-      <td>70</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Heidelberg</th>
-      <td>67</td>
-    </tr>
-    <tr>
-      <th>Klebsiella aerogenes</th>
-      <td>66</td>
-    </tr>
-    <tr>
-      <th>Staphylococcus aureus</th>
-      <td>56</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Saintpaul</th>
-      <td>36</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Enteritidis</th>
-      <td>31</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Typhimurium</th>
-      <td>29</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Hadar</th>
-      <td>23</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Schwarzengrund</th>
-      <td>19</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Muenchen</th>
-      <td>19</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Infantis</th>
-      <td>17</td>
-    </tr>
-    <tr>
-      <th>Neisseria meningitidis</th>
-      <td>17</td>
-    </tr>
-    <tr>
-      <th>Serratia marcescens</th>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Senftenberg</th>
-      <td>13</td>
-    </tr>
-    <tr>
-      <th>Citrobacter freundii</th>
-      <td>11</td>
-    </tr>
-    <tr>
-      <th>Klebsiella variicola</th>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Reading</th>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>Klebsiella oxytoca</th>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>Proteus mirabilis</th>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Derby</th>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>Escherichia coli BIDMC 72</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Escherichia coli BIDMC 71</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Escherichia coli BIDMC 70</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Escherichia coli UCI 58</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Escherichia coli UCI 65</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Escherichia coli UCI 66</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella aerogenes UCI 46</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella pneumoniae 440_1540</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella pneumoniae 361_1301</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella pneumoniae 280_1220</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella pneumoniae 160_1080</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella pneumoniae 140_1040</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella pneumoniae 120_1020</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella oxytoca MGH 42</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella oxytoca MGH 28</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella aerogenes UCI 48</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella aerogenes UCI 47</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella aerogenes UCI 45</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Escherichia coli str. K-12 substr. DH10B</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella aerogenes UCI 28</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella aerogenes UCI 27</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella aerogenes UCI 16</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella aerogenes UCI 15</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella aerogenes MGH 78</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella aerogenes MGH 77</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella aerogenes MGH 62</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Klebsiella aerogenes MGH 61</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Herbaspirillum sp. VT-16-41</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Escherichia coli str. K-12 substr. MG1655</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>bacterium</th>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-<p>447 rows × 1 columns</p>
-</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>taxonomy_name
+Mycobacterium tuberculosis                                         1490
+Acinetobacter baumannii                                             955
+Salmonella enterica                                                 802
+Escherichia coli                                                    354
+Streptococcus pneumoniae                                            318
+Klebsiella pneumoniae                                               271
+Salmonella enterica subsp. enterica serovar Typhimurium var. 5-      91
+Pseudomonas aeruginosa                                               89
+Acinetobacter pittii                                                 76
+Name: sample_id, dtype: int64</pre>
 </div>
 
 </div>
@@ -12990,16 +12187,10 @@ Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[256]:</div>
+<div class="prompt input_prompt">In&nbsp;[155]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># organism name might be less restrictive</span>
-<span class="n">org_names</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">sample_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())])</span>
-<span class="n">org_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">org_names</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;freq&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;freq&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="c1"># top occurances</span>
-<span class="n">org_table</span>
-<span class="c1"># not really. and some organisms are missing</span>
-<span class="c1"># doesn&#39;t capture all the e coli strains</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">([</span><span class="n">bigdf</span><span class="o">.</span><span class="n">antibiotic</span><span class="p">,</span> <span class="n">bigdf</span><span class="o">.</span><span class="n">resistance_phenotype</span><span class="p">],</span> <span class="n">bigdf</span><span class="o">.</span><span class="n">organism_name</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13012,7 +12203,7 @@ Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[256]:</div>
+<div class="prompt output_prompt">Out[155]:</div>
 
 
 
@@ -13034,262 +12225,1547 @@ Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>col_0</th>
-      <th>freq</th>
-    </tr>
-    <tr>
-      <th>row_0</th>
       <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Mycobacterium tuberculosis</th>
-      <td>1490</td>
-    </tr>
-    <tr>
-      <th>Acinetobacter baumannii</th>
-      <td>965</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica</th>
-      <td>802</td>
-    </tr>
-    <tr>
-      <th>Escherichia coli</th>
-      <td>390</td>
-    </tr>
-    <tr>
-      <th>Streptococcus pneumoniae</th>
-      <td>318</td>
-    </tr>
-    <tr>
-      <th>Klebsiella pneumoniae</th>
-      <td>284</td>
-    </tr>
-    <tr>
-      <th>NA</th>
-      <td>239</td>
-    </tr>
-    <tr>
-      <th>Pseudomonas aeruginosa</th>
-      <td>110</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Typhimurium var. 5-</th>
-      <td>91</td>
-    </tr>
-    <tr>
-      <th>Enterobacter cloacae</th>
-      <td>79</td>
-    </tr>
-    <tr>
-      <th>Acinetobacter pittii</th>
-      <td>76</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Kentucky</th>
-      <td>70</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Heidelberg</th>
-      <td>67</td>
-    </tr>
-    <tr>
-      <th>Enterobacter aerogenes</th>
-      <td>63</td>
-    </tr>
-    <tr>
-      <th>Staphylococcus aureus</th>
-      <td>56</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Saintpaul</th>
-      <td>36</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Enteritidis</th>
-      <td>31</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Typhimurium</th>
-      <td>29</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Hadar</th>
-      <td>23</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Schwarzengrund</th>
-      <td>19</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Muenchen</th>
-      <td>19</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Infantis</th>
-      <td>17</td>
-    </tr>
-    <tr>
-      <th>Neisseria meningitidis</th>
-      <td>17</td>
-    </tr>
-    <tr>
-      <th>Serratia marcescens</th>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Senftenberg</th>
-      <td>13</td>
-    </tr>
-    <tr>
-      <th>Citrobacter freundii</th>
-      <td>11</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Agona</th>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar Derby</th>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>Klebsiella oxytoca</th>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>Proteus mirabilis</th>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>Enterobacter cloacae complex sp. FDA-CDC-AR_0164</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. enterica serovar 4,12:d:-</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Pectobacterium carotovorum subsp. carotovorum PCC21</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. arizonae serovar 18:z4,z23:- str. CVM N31597</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Salmonella enterica subsp. arizonae serovar 18:z4,z23:- str. CVM N29354</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Raoultella ornithinolytica</th>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>Pseudomonas sp. MRSN12121</th>
-      <td>1</td>
-    </tr>
-    <tr>
+      <th>organism_name</th>
       <th>Achromobacter sp.</th>
+      <th>Acinetobacter baumannii</th>
+      <th>Acinetobacter calcoaceticus</th>
+      <th>Acinetobacter nosocomialis</th>
+      <th>Acinetobacter pittii</th>
+      <th>Acinetobacter sp. 0000-0051-1906</th>
+      <th>Acinetobacter sp. 0000-0051-1909</th>
+      <th>Acinetobacter sp. 0000-0051-8448</th>
+      <th>Acinetobacter sp. 0000-0052-5682</th>
+      <th>Acinetobacter sp. 0000-0052-7200</th>
+      <th>...</th>
+      <th>Shigella flexneri</th>
+      <th>Shigella sonnei</th>
+      <th>Staphylococcus aureus</th>
+      <th>Staphylococcus aureus subsp. aureus</th>
+      <th>Staphylococcus epidermidis</th>
+      <th>Staphylococcus pettenkoferi</th>
+      <th>Staphylococcus saprophyticus</th>
+      <th>Streptococcus agalactiae</th>
+      <th>Streptococcus pneumoniae</th>
+      <th>Vibrio parahaemolyticus</th>
+    </tr>
+    <tr>
+      <th>antibiotic</th>
+      <th>resistance_phenotype</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="4" valign="top">amikacin</th>
+      <th>intermediate</th>
+      <td>1</td>
+      <td>62</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>not defined</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>resistant</th>
+      <td>0</td>
+      <td>510</td>
+      <td>0</td>
+      <td>0</td>
+      <td>13</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>susceptible</th>
+      <td>1</td>
+      <td>641</td>
+      <td>0</td>
+      <td>4</td>
+      <td>63</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">amoxicillin</th>
+      <th>intermediate</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>9</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>not defined</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>resistant</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>susceptible</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>168</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">amoxicillin-clavulanic acid</th>
+      <th>intermediate</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>not defined</th>
+      <td>0</td>
+      <td>16</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>resistant</th>
+      <td>0</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>susceptible</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">ampicillin</th>
+      <th>intermediate</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>not defined</th>
+      <td>0</td>
+      <td>16</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>resistant</th>
+      <td>0</td>
+      <td>712</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>Pseudomonas oryzihabitans</th>
+      <th>susceptible</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">ampicillin-sulbactam</th>
+      <th>intermediate</th>
+      <td>0</td>
+      <td>183</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>not defined</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>resistant</th>
+      <td>0</td>
+      <td>429</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>susceptible</th>
+      <td>0</td>
+      <td>532</td>
+      <td>0</td>
+      <td>4</td>
+      <td>37</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">azithromycin</th>
+      <th>resistant</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>susceptible</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">aztreonam</th>
+      <th>intermediate</th>
+      <td>1</td>
+      <td>14</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>not defined</th>
+      <td>0</td>
+      <td>16</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>resistant</th>
+      <td>0</td>
+      <td>780</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>susceptible</th>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>benzylpenicillin</th>
+      <th>resistant</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">capreomycin</th>
+      <th>not defined</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>resistant</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>susceptible</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>sulbactam</th>
+      <th>resistant</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">sulfamethoxazole</th>
+      <th>intermediate</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>resistant</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>susceptible</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">sulfisoxazole</th>
+      <th>resistant</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>susceptible</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>synercid</th>
+      <th>susceptible</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>181</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">teicoplanin</th>
+      <th>resistant</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>susceptible</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">tetracycline</th>
+      <th>intermediate</th>
+      <td>0</td>
+      <td>41</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>not defined</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>34</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>resistant</th>
+      <td>1</td>
+      <td>614</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>19</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>susceptible</th>
+      <td>0</td>
+      <td>234</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>14</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>298</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>Pseudomonas monteilii</th>
-      <td>1</td>
+      <th>ticarcillin</th>
+      <th>resistant</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>Pseudomonas fluorescens</th>
-      <td>1</td>
+      <th>ticarcillin-clavulanic acid</th>
+      <th>resistant</th>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>Pseudomonas aeruginosa PAO1</th>
-      <td>1</td>
+      <th rowspan="4" valign="top">tigecycline</th>
+      <th>intermediate</th>
+      <td>0</td>
+      <td>25</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>Providencia stuartii</th>
-      <td>1</td>
+      <th>not defined</th>
+      <td>0</td>
+      <td>55</td>
+      <td>0</td>
+      <td>0</td>
+      <td>38</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>Providencia rettgeri</th>
-      <td>1</td>
+      <th>resistant</th>
+      <td>0</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>Proteus vulgaris</th>
+      <th>susceptible</th>
+      <td>0</td>
+      <td>329</td>
+      <td>0</td>
+      <td>4</td>
+      <td>38</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
       <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>Mycobacterium canettii</th>
+      <th rowspan="4" valign="top">tobramycin</th>
+      <th>intermediate</th>
       <td>1</td>
+      <td>96</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>Enterobacteriaceae bacterium 56852</th>
-      <td>1</td>
+      <th>not defined</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>Leclercia adecarboxylata</th>
+      <th>resistant</th>
+      <td>0</td>
+      <td>723</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>Lachnoclostridium sp.</th>
+      <th>susceptible</th>
       <td>1</td>
+      <td>473</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>Kurthia sp. 56715</th>
-      <td>1</td>
+      <th>trimethoprim</th>
+      <th>resistant</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>Kluyvera sp. GT-16</th>
-      <td>1</td>
+      <th rowspan="4" valign="top">trimethoprim-sulfamethoxazole</th>
+      <th>intermediate</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>42</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>Kluyvera ascorbata</th>
-      <td>1</td>
+      <th>not defined</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>Klebsiella quasipneumoniae subsp. similipneumoniae</th>
+      <th>resistant</th>
+      <td>0</td>
+      <td>867</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>16</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>Klebsiella quasipneumoniae</th>
+      <th>susceptible</th>
       <td>1</td>
+      <td>135</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>13</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>260</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>Herbaspirillum sp. VT-16-41</th>
+      <th rowspan="2" valign="top">vancomycin</th>
+      <th>resistant</th>
+      <td>0</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>Escherichia coli str. K-12 substr. MG1655</th>
+      <th>susceptible</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
       <td>1</td>
-    </tr>
-    <tr>
-      <th>Escherichia coli str. K-12 substr. DH10B</th>
+      <td>2</td>
       <td>1</td>
-    </tr>
-    <tr>
-      <th>Escherichia coli BL21(DE3)</th>
       <td>1</td>
-    </tr>
-    <tr>
-      <th>Enterococcus faecium</th>
       <td>1</td>
-    </tr>
-    <tr>
-      <th>bacterium</th>
-      <td>1</td>
+      <td>181</td>
+      <td>0</td>
     </tr>
   </tbody>
 </table>
-<p>166 rows × 1 columns</p>
+<p>229 rows × 133 columns</p>
 </div>
 </div>
 
@@ -13301,27 +13777,11 @@ Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[309]:</div>
+<div class="prompt input_prompt">In&nbsp;[156]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># for e coli, get all antibiotic tables</span>
-<span class="n">my_organism</span> <span class="o">=</span> <span class="s1">&#39;Escherichia coli&#39;</span>
-<span class="n">ecoli_antibiotics</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s1">&#39;Antibiotic&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">sample_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">==</span><span class="n">my_organism</span><span class="p">]</span>
-<span class="n">ecoli_antibiotics_unlist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">ecoli_antibiotics</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">])</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[271]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ecoli_antibiotics_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">ecoli_antibiotics_unlist</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;freq&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;freq&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">ecoli_antibiotics_table</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ecolidf</span> <span class="o">=</span> <span class="n">bigdf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bigdf</span><span class="o">.</span><span class="n">organism_name</span><span class="o">==</span><span class="s1">&#39;Escherichia coli&#39;</span><span class="p">]</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">ecolidf</span><span class="o">.</span><span class="n">resistance_phenotype</span><span class="p">,</span> <span class="n">ecolidf</span><span class="o">.</span><span class="n">antibiotic</span><span class="p">,</span> <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13334,7 +13794,7 @@ Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[271]:</div>
+<div class="prompt output_prompt">Out[156]:</div>
 
 
 
@@ -13356,50 +13816,284 @@ Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>col_0</th>
-      <th>freq</th>
+      <th>antibiotic</th>
+      <th>amikacin</th>
+      <th>amoxicillin</th>
+      <th>amoxicillin-clavulanic acid</th>
+      <th>ampicillin</th>
+      <th>ampicillin-sulbactam</th>
+      <th>azithromycin</th>
+      <th>aztreonam</th>
+      <th>benzylpenicillin</th>
+      <th>cefalexin</th>
+      <th>cefalotin</th>
+      <th>...</th>
+      <th>teicoplanin</th>
+      <th>tetracycline</th>
+      <th>ticarcillin</th>
+      <th>ticarcillin-clavulanic acid</th>
+      <th>tigecycline</th>
+      <th>tobramycin</th>
+      <th>trimethoprim</th>
+      <th>trimethoprim-sulfamethoxazole</th>
+      <th>vancomycin</th>
+      <th>All</th>
     </tr>
     <tr>
-      <th>row_0</th>
+      <th>resistance_phenotype</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>ciprofloxacin</th>
-      <td>387</td>
+      <th>intermediate</th>
+      <td>3</td>
+      <td>0</td>
+      <td>67</td>
+      <td>0</td>
+      <td>6</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>21</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>255</td>
     </tr>
     <tr>
-      <th>ceftriaxone</th>
-      <td>386</td>
+      <th>not defined</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>299</td>
     </tr>
     <tr>
-      <th>gentamicin</th>
-      <td>382</td>
-    </tr>
-    <tr>
-      <th>trimethoprim-sulfamethoxazole</th>
-      <td>380</td>
-    </tr>
-    <tr>
-      <th>ampicillin</th>
-      <td>377</td>
-    </tr>
-    <tr>
-      <th>amoxicillin-clavulanic acid</th>
-      <td>358</td>
-    </tr>
-    <tr>
-      <th>tetracycline</th>
-      <td>342</td>
-    </tr>
-    <tr>
-      <th>cefoxitin</th>
+      <th>resistant</th>
+      <td>19</td>
+      <td>2</td>
+      <td>141</td>
       <td>321</td>
+      <td>74</td>
+      <td>2</td>
+      <td>123</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>...</td>
+      <td>1</td>
+      <td>208</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>79</td>
+      <td>2</td>
+      <td>188</td>
+      <td>1</td>
+      <td>3101</td>
     </tr>
     <tr>
-      <th>ertapenem</th>
-      <td>309</td>
+      <th>susceptible</th>
+      <td>253</td>
+      <td>0</td>
+      <td>134</td>
+      <td>28</td>
+      <td>7</td>
+      <td>75</td>
+      <td>29</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>104</td>
+      <td>0</td>
+      <td>0</td>
+      <td>91</td>
+      <td>117</td>
+      <td>0</td>
+      <td>164</td>
+      <td>0</td>
+      <td>3001</td>
+    </tr>
+    <tr>
+      <th>susceptible-dose dependent</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>All</th>
+      <td>275</td>
+      <td>2</td>
+      <td>342</td>
+      <td>349</td>
+      <td>87</td>
+      <td>77</td>
+      <td>155</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>...</td>
+      <td>1</td>
+      <td>314</td>
+      <td>1</td>
+      <td>1</td>
+      <td>93</td>
+      <td>217</td>
+      <td>2</td>
+      <td>352</td>
+      <td>1</td>
+      <td>6657</td>
+    </tr>
+  </tbody>
+</table>
+<p>6 rows × 65 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[157]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ecoli_ciprodf</span> <span class="o">=</span> <span class="n">ecolidf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ecolidf</span><span class="o">.</span><span class="n">antibiotic</span><span class="o">==</span><span class="s1">&#39;ciprofloxacin&#39;</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[158]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">ecoli_ciprodf</span><span class="o">.</span><span class="n">resistance_phenotype</span><span class="p">,</span> <span class="n">ecoli_ciprodf</span><span class="o">.</span><span class="n">antibiotic</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[158]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>antibiotic</th>
+      <th>ciprofloxacin</th>
+    </tr>
+    <tr>
+      <th>resistance_phenotype</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>intermediate</th>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>resistant</th>
+      <td>218</td>
+    </tr>
+    <tr>
+      <th>susceptible</th>
+      <td>131</td>
     </tr>
   </tbody>
 </table>
@@ -13414,61 +14108,10 @@ Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[343]:</div>
+<div class="prompt input_prompt">In&nbsp;[159]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># for ecoli that have been tested with some antibiotic, what is the distribution of values?</span>
-<span class="n">ab</span> <span class="o">=</span> <span class="s1">&#39;ciprofloxacin&#39;</span>
-<span class="n">r</span><span class="o">=</span> <span class="n">test_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_df</span><span class="o">.</span><span class="n">Antibiotic</span> <span class="o">==</span><span class="s1">&#39;ciprofloxacin&#39;</span><span class="p">,</span> <span class="s1">&#39;Resistance phenotype&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">resistance_bool_temp</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">Antibiotic</span> <span class="o">==</span> <span class="n">ab</span><span class="p">,</span> <span class="s1">&#39;Resistance phenotype&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> 
-                     <span class="nb">list</span><span class="p">(</span><span class="n">sample_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Escherichia coli&#39;</span><span class="p">]</span>
-<span class="n">resistance_bool</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;NA&#39;</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">resistance_bool_temp</span><span class="p">]</span>
-<span class="n">resistance_values_temp</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">Antibiotic</span> <span class="o">==</span> <span class="n">ab</span><span class="p">,</span> <span class="s1">&#39;Measurement&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> 
-                     <span class="nb">list</span><span class="p">(</span><span class="n">sample_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Escherichia coli&#39;</span><span class="p">]</span>
-<span class="n">resistance_values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">resistance_values_temp</span><span class="p">]</span>
-<span class="n">resistance_sign_temp</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">Antibiotic</span> <span class="o">==</span> <span class="n">ab</span><span class="p">,</span> <span class="s1">&#39;Measurement sign&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> 
-                     <span class="nb">list</span><span class="p">(</span><span class="n">sample_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Escherichia coli&#39;</span><span class="p">]</span>
-<span class="n">resistance_sign</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;NA&#39;</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">resistance_sign_temp</span><span class="p">]</span>
-<span class="n">resistance_unit_temp</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">Antibiotic</span> <span class="o">==</span> <span class="n">ab</span><span class="p">,</span> <span class="s1">&#39;Measurement units&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> 
-                     <span class="nb">list</span><span class="p">(</span><span class="n">sample_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Escherichia coli&#39;</span><span class="p">]</span>
-<span class="n">resistance_unit</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;NA&#39;</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">resistance_unit_temp</span><span class="p">]</span>
-<span class="n">resistance_text</span> <span class="o">=</span> <span class="p">[</span><span class="n">i1</span> <span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i2</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">i3</span> <span class="k">for</span> <span class="n">i1</span><span class="p">,</span><span class="n">i2</span><span class="p">,</span><span class="n">i3</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">resistance_sign</span><span class="p">,</span> <span class="n">resistance_values</span><span class="p">,</span> <span class="n">resistance_unit</span><span class="p">)]</span>
-<span class="n">ecoli_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">sample_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Escherichia coli&#39;</span><span class="p">]</span>
-<span class="n">resistance_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;organism&#39;</span><span class="p">:</span> <span class="n">my_organism</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">ecoli_ids</span><span class="p">,</span> <span class="n">ab</span><span class="p">:</span> <span class="n">resistance_bool</span><span class="p">,</span>
-                                      <span class="s1">&#39;measurement&#39;</span><span class="p">:</span> <span class="n">resistance_text</span><span class="p">,</span> <span class="s1">&#39;measurement_value&#39;</span><span class="p">:</span> <span class="n">resistance_values</span><span class="p">})</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[371]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">resistance_table</span> <span class="o">=</span> <span class="n">resistance_table</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;measurement_value&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">na_position</span><span class="o">=</span><span class="s1">&#39;last&#39;</span><span class="p">)</span>
-<span class="n">resistance_table</span> <span class="o">=</span> <span class="n">resistance_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">resistance_table</span><span class="o">.</span><span class="n">measurement_value</span><span class="p">)]</span>
-<span class="n">resistance_table</span>
-<span class="c1"># take first and last 5 ids</span>
-<span class="n">nrow</span> <span class="o">=</span> <span class="n">resistance_table</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">susceptible_ids</span> <span class="o">=</span> <span class="n">resistance_table</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-<span class="n">resistant_ids</span> <span class="o">=</span> <span class="n">resistance_table</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">nrow</span><span class="o">-</span><span class="mi">5</span><span class="p">:][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[353]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">resistance_values</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">rv</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">rv</span><span class="p">)]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ecoli_ciprodf</span><span class="o">.</span><span class="n">measurement</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">ecoli_ciprodf</span><span class="o">.</span><span class="n">measurement</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13484,14 +14127,15 @@ Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:
 <div class="prompt"></div>
 
 
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/ben/miniconda3/envs/py36/lib/python3.6/site-packages/pandas/core/generic.py:3643: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
 
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-"
->
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html#indexing-view-versus-copy
+  self[name] = value
+</pre>
 </div>
-
 </div>
 
 </div>
@@ -13500,11 +14144,28 @@ Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[373]:</div>
+<div class="prompt input_prompt">In&nbsp;[182]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">resistant_ids</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">susceptible_ids</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ecoli_ciprodf</span> <span class="o">=</span> <span class="n">ecoli_ciprodf</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;measurement&#39;</span><span class="p">)</span>
+<span class="n">susceptible_df</span> <span class="o">=</span> <span class="n">ecoli_ciprodf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ecoli_ciprodf</span><span class="o">.</span><span class="n">resistance_phenotype</span><span class="o">==</span><span class="s1">&#39;susceptible&#39;</span><span class="p">]</span>
+<span class="n">susceptible_ids</span> <span class="o">=</span> <span class="n">susceptible_df</span><span class="p">[</span><span class="s1">&#39;sample_id&#39;</span><span class="p">]</span>
+<span class="n">resistant_df</span> <span class="o">=</span> <span class="n">ecoli_ciprodf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ecoli_ciprodf</span><span class="o">.</span><span class="n">resistance_phenotype</span><span class="o">==</span><span class="s1">&#39;resistant&#39;</span><span class="p">]</span>
+<span class="n">resistant_ids</span> <span class="o">=</span> <span class="n">resistant_df</span><span class="p">[</span><span class="s1">&#39;sample_id&#39;</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[183]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">susceptible_ids</span><span class="o">.</span><span class="n">values</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">resistant_ids</span><span class="o">.</span><span class="n">values</span><span class="p">)))</span>
 </pre></div>
 
 </div>
@@ -13521,8 +14182,8 @@ Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[&#39;4571743&#39; &#39;4393397&#39; &#39;4339724&#39; &#39;5729964&#39; &#39;5774080&#39;]
-[&#39;3177675&#39; &#39;3177633&#39; &#39;3177621&#39; &#39;3177663&#39; &#39;3177662&#39;]
+<pre>131
+217
 </pre>
 </div>
 </div>
@@ -13533,10 +14194,44 @@ Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[184]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">1</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">susceptible_ids</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;/home/ben/bhatt_local/meta-mustache/ecoli_cipro_susceptible_ids.txt&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">resistant_ids</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;/home/ben/bhatt_local/meta-mustache/ecoli_cipro_resistant_ids.txt&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">all_ids</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">susceptible_ids</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">resistant_ids</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+<span class="n">all_ids</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;/home/ben/bhatt_local/meta-mustache/ecoli_cipro_all_ids.txt&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[185]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># save dataframe to go with this</span>
+<span class="c1"># savedf = ecoli_ciprodf.iloc[0:50]</span>
+<span class="c1"># savedf = savedf.append(ecoli_ciprodf.iloc[-50:])</span>
+
+<span class="n">savedf</span> <span class="o">=</span> <span class="n">susceptible_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resistant_df</span><span class="p">)</span>
+<span class="n">savedf</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;/home/ben/bhatt_local/meta-mustache/ecoli_cipro_sample_table.txt&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span> <span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[186]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">savedf</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 
 </div>
@@ -13549,13 +14244,13 @@ Status {&#39;status&#39;: &#39;live&#39;, &#39;when&#39;: &#39;2017-06-21T15:39:
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[1]:</div>
+<div class="prompt output_prompt">Out[186]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>1</pre>
+<pre>(349, 10)</pre>
 </div>
 
 </div>
