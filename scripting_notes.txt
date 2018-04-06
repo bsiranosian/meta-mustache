@@ -7,4 +7,7 @@ for i in $(cat ../ecoli_cipro_all_ids.txt) ; do echo -e $i "\t" $(wget -O - -o /
 
 for i in $(ls *_SRR.txt); do echo $i $(grep -o SRR....... $i | uniq); done
 
+# downloading from SRA
+cd ~/bhatt_local/meta-mustache/srr
+for i in $(cat ../srr_download_list_50.txt); do if [ ! -f $i"_1.fastq" ]; then  echo "downloading " $i; fastq-dump --split-files $i; else echo "alreaedy have " $i; fi; done   
 

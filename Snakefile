@@ -1,4 +1,15 @@
 configfile: "config.yaml"
+from os.path import join
+WC_fastqs = glob_wildcards(join(config['fastq_dir'], '{SRR}_1.fastq'))
+SAMPLES = set(WC_fastqs.SRR)
+super_deduper = config['super_deduper_exec']
+
+rule all:
+    input:
+        expand('trimmed/{SRR}_nodup_PE1_val_1.fq',SRR=SAMPLES)
+    run:
+        print("Finished through alignment step!")
+
 
 rule deduplicate_reads:
     input:
@@ -8,7 +19,7 @@ rule deduplicate_reads:
         "deduplicated/{SRR}_nodup_PE1.fastq",
         "deduplicated/{SRR}_nodup_PE2.fastq"
     shell:
-        "~/software/Super-Deduper/super_deduper -1 {input.r1} -2 {input.r2} -p deduplicated/{wildcards.SRR}"
+        "{super_deduper} -1 {input.r1} -2 {input.r2} -p deduplicated/{wildcards.SRR}"
 
 rule trim_galore:
     input: 
@@ -24,8 +35,8 @@ rule trim_galore:
 rule mustache_align:
     input:
         "trimmed/{SRR}_nodup_PE1_val_1.fq",
-        "trimmed/{SRR}_nodup_PE2_val_2.fq"
-        "/home/bsiranos/bs_scratch/genomes/GCF_000005845.2_ASM584v2_genomic.fna"
+        "trimmed/{SRR}_nodup_PE2_val_2.fq",
+        config['ref_genome']
     output:
         "aligned/{SRR}.bam"
     shell:

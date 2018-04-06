@@ -1,2 +1,6 @@
-srr_names:
-    SRR2239575
+# loation of fastq files
+fastq_dir: "/labs/asbhatt/gsfs0/bsiranos/meta-mustache/srr/"
+# reference genome for mapping
+ref_genome: "/labs/asbhatt/gsfs0/bsiranos/genomes/GCF_000005845.2_ASM584v2_genomic.fna"
+# location of super_deduper
+super_deduper_exec: "/home/bsiranos/software/Super-Deduper/super_deduper"
