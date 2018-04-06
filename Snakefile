@@ -29,6 +29,8 @@ rule trim_galore:
         "trimmed/{SRR}_nodup_PE1_val_1.fq",
         "trimmed/{SRR}_nodup_PE2_val_2.fq"
     shell:
+        "module load trim_galore"
+        "module load cutadapt"
         "trim_galore --fastqc --paired {input} -o trimmed"
 
 

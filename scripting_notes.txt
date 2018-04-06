@@ -1,6 +1,4 @@
 # getting SRR number from the ids
-cd ~/bhatt_local/meta-mustache/ncbi_webpages
-
 
 echo -n > id_to_srr.txt
 for i in $(cat ../ecoli_cipro_all_ids.txt) ; do echo -e $i "\t" $(wget -O - -o /dev/null "https://www.ncbi.nlm.nih.gov/sra?LinkName=biosample_sra&from_uid="$i | grep -e SRR -e PAIRED -e ILLUMINA |grep -o SRR....... | uniq) >> id_to_srr.txt ; done
@@ -8,6 +6,6 @@ for i in $(cat ../ecoli_cipro_all_ids.txt) ; do echo -e $i "\t" $(wget -O - -o /
 for i in $(ls *_SRR.txt); do echo $i $(grep -o SRR....... $i | uniq); done
 
 # downloading from SRA
-cd ~/bhatt_local/meta-mustache/srr
-for i in $(cat ../srr_download_list_50.txt); do if [ ! -f $i"_1.fastq" ]; then  echo "downloading " $i; fastq-dump --split-files $i; else echo "alreaedy have " $i; fi; done   
+cd /labs/asbhatt/gsfs0/bsiranos/meta-mustache/srr_tmp
+for i in $(cat /labs/asbhatt/gsfs0/bsiranos/meta-mustache/srr_download_list_50.txt); do if [ ! -f "/labs/asbhatt/gsfs0/bsiranos/meta-mustache/srr/"$i"_1.fastq" ]; then  echo "downloading " $i; fastq-dump --split-files $i && mv $i"_1.fastq" $i"_2.fastq" /labs/asbhatt/gsfs0/bsiranos/meta-mustache/srr; else echo "alreaedy have " $i; fi; done   
 
