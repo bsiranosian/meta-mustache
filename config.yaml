@@ -4,3 +4,5 @@ fastq_dir: "/labs/asbhatt/gsfs0/bsiranos/meta-mustache/srr/"
 ref_genome: "/labs/asbhatt/gsfs0/bsiranos/genomes/GCF_000005845.2_ASM584v2_genomic.fna"
 # location of super_deduper
 super_deduper_exec: "/home/bsiranos/software/Super-Deduper/super_deduper"
+# location of blast database with nr downloaded
+blastdb_location: "/labs/asbhatt/gsfs0/bsiranos/blast_db/"

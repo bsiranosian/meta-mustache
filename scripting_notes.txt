@@ -6,6 +6,28 @@ for i in $(cat ../ecoli_cipro_all_ids.txt) ; do echo -e $i "\t" $(wget -O - -o /
 for i in $(ls *_SRR.txt); do echo $i $(grep -o SRR....... $i | uniq); done
 
 # downloading from SRA
+module load sratoolkit
 cd /labs/asbhatt/gsfs0/bsiranos/meta-mustache/srr_tmp
 for i in $(cat /labs/asbhatt/gsfs0/bsiranos/meta-mustache/srr_download_list_50.txt); do if [ ! -f "/labs/asbhatt/gsfs0/bsiranos/meta-mustache/srr/"$i"_1.fastq" ]; then  echo "downloading " $i; fastq-dump --split-files $i && mv $i"_1.fastq" $i"_2.fastq" /labs/asbhatt/gsfs0/bsiranos/meta-mustache/srr; else echo "alreaedy have " $i; fi; done   
+
+# blast database making
+cd /labs/asbhatt/gsfs0/bsiranos/blast_db/
+for i in $(seq -w 0 83); do wget "ftp://ftp.ncbi.nlm.nih.gov/blast/db/nr."$i".tar.gz" && tar xvfz "nr."$i".tar.gz"; done
+# check MD5 of all these
+for i in $(seq -w 0 83); do wget "ftp://ftp.ncbi.nlm.nih.gov/blast/db/nr."$i".tar.gz.md5"; done
+for i in $(seq -w 0 83); do echo "testng "$i; if [ "$(diff <(md5sum nr."$i".tar.gz) nr."$i".tar.gz.md5)" ]; then echo $i" failed MD5 "; fi; done
+
+
+# get desired sequences from fasta results
+# should probably do this with awk....
+paste -d '\n' <(sed -e 's/^/>/' <(grep "M" SRR2239592.insertions_seqs.tsv | cut -f 1,2,3,4,5,6,7,8 | tr "\t" "_"))  <(grep "M" SRR2239592.insertions_seqs.tsv | cut -f 9) > SRR2239592.insertions_seqs_blast.fa
+
+
+# searching blast with insertion sequence results
+module load blast
+# need to set blast db search location
+export BLASTDB="/labs/asbhatt/gsfs0/bsiranos/blast_db/"
+# command line search
+echo -e "qseqid\tsseqid\tstaxids\tsscinames\tscomnames\tsblastnames\tsalltitles\tpident\tlength\tmismatch\tgapopen\tqstart\tqend\tsstart\tsend\tevalue\tbitscore" > find_results/SRR2239592.insertions_seqs_blast_results.tsv
+blastx -query find_results/SRR2239592.insertions_seqs_blast.fa -db tsa_nr -outfmt "6 qseqid sseqid staxids sscinames scomnames sblastnames salltitles pident length mismatch gapopen qstart qend sstart send evalue bitscore"  >> find_results/SRR2239592.insertions_seqs_blast_results.tsv
 
