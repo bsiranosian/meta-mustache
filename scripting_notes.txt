@@ -28,6 +28,6 @@ module load blast
 # need to set blast db search location
 export BLASTDB="/labs/asbhatt/gsfs0/bsiranos/blast_db/"
 # command line search
-echo -e "qseqid\tsseqid\tstaxids\tsscinames\tscomnames\tsblastnames\tsalltitles\tpident\tlength\tmismatch\tgapopen\tqstart\tqend\tsstart\tsend\tevalue\tbitscore" > find_results/SRR2239592.insertions_seqs_blast_results.tsv
-blastx -query find_results/SRR2239592.insertions_seqs_blast.fa -db tsa_nr -outfmt "6 qseqid sseqid staxids sscinames scomnames sblastnames salltitles pident length mismatch gapopen qstart qend sstart send evalue bitscore"  >> find_results/SRR2239592.insertions_seqs_blast_results.tsv
+echo -e "qseqid\tsseqid\tstaxids\tsscinames\tscomnames\tsblastnames\tsalltitles\tpident\tlength\tmismatch\tgapopen\tqstart\tqend\tsstart\tsend\tevalue\tbitscore" > find_results/SRR2239592.insertions_seqs_blast_results.tsv22
+blastx -query find_results/SRR2239592.insertions_seqs_blast.fa -db tsa_nr -outfmt "6 qseqid sseqid staxids sscinames scomnames sblastnames salltitles pident length mismatch gapopen qstart qend sstart send evalue bitscore"  >> find_results/SRR2239592.insertions_seqs_blast_results.tsv22
 

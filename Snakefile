@@ -2,7 +2,7 @@ configfile: "config.yaml"
 from os.path import join
 WC_fastqs = glob_wildcards(join(config['fastq_dir'], '{SRR}_1.fastq'))
 SAMPLES = set(WC_fastqs.SRR)
-SAMPLES = ['SRR2239592']
+# SAMPLES = ['SRR2239592']
 super_deduper = config['super_deduper_exec']
 blastdb_location = config['blastdb_location']
 
@@ -10,7 +10,7 @@ rule all:
     input:
         # expand('trimmed/{SRR}_nodup_PE1_val_1.fq',SRR=SAMPLES)
         # expand('aligned/{SRR}.bam', SRR=SAMPLES)
-        expand("find_results/{SRR}.insertions_seqs_blast_results.tsv", SRR=SAMPLES)
+        expand("find_results/{SRR}/{SRR}.insertions_seqs_blast_results.tsv", SRR=SAMPLES)
     run:
         print("Finished through alignment step!")
 
@@ -58,24 +58,24 @@ rule mustache_find:
         "aligned/{SRR}.bam",
         config['ref_genome']
     output:
-        "find_results/{SRR}.insertions_seqs.tsv"
+        "find_results/{SRR}/{SRR}.insertions_seqs.tsv"
     shell:
-        "mustache find paired {input} {wildcards.SRR} --outdir find_results"
+        "mustache find paired {input} {wildcards.SRR} --outdir find_results/{wildcards.SRR}"
 
 rule prepare_blast:
     input:
-        "find_results/{SRR}.insertions_seqs.tsv"
+        "find_results/{SRR}/{SRR}.insertions_seqs.tsv"
     output:
-        "find_results/{SRR}.insertions_seqs_blast.fa"
+        "find_results/{SRR}/{SRR}.insertions_seqs_blast.fa"
     shell:
         """
         paste -d '\n' <(sed -e 's/^/>/' <(grep "M" {input} | cut -f 1,2,3,4,5,6,7,8 | tr "\t" "_"))  <(grep "M" {input} | cut -f 9) > {output}
         """
 rule run_blast:
     input:
-        "find_results/{SRR}.insertions_seqs_blast.fa"
+        "find_results/{SRR}/{SRR}.insertions_seqs_blast.fa"
     output:
-        "find_results/{SRR}.insertions_seqs_blast_results.tsv"
+        "find_results/{SRR}/{SRR}.insertions_seqs_blast_results.tsv"
     shell:
         """
         module load blast
