@@ -13,8 +13,8 @@ for i in $(cat /labs/asbhatt/gsfs0/bsiranos/meta-mustache/srr_download_list_50.t
 # blast database making
 cd /labs/asbhatt/gsfs0/bsiranos/blast_db/
 for i in $(seq -w 0 83); do wget "ftp://ftp.ncbi.nlm.nih.gov/blast/db/nr."$i".tar.gz" && tar xvfz "nr."$i".tar.gz"; done
-# check MD5 of all these
-for i in $(seq -w 0 83); do wget "ftp://ftp.ncbi.nlm.nih.gov/blast/db/nr."$i".tar.gz.md5"; done
+# check MD5 of all thes
+efor i in $(seq -w 0 83); do wget "ftp://ftp.ncbi.nlm.nih.gov/blast/db/nr."$i".tar.gz.md5"; done
 for i in $(seq -w 0 83); do echo "testng "$i; if [ "$(diff <(md5sum nr."$i".tar.gz) nr."$i".tar.gz.md5)" ]; then echo $i" failed MD5 "; fi; done
 
 
@@ -31,3 +31,18 @@ export BLASTDB="/labs/asbhatt/gsfs0/bsiranos/blast_db/"
 echo -e "qseqid\tsseqid\tstaxids\tsscinames\tscomnames\tsblastnames\tsalltitles\tpident\tlength\tmismatch\tgapopen\tqstart\tqend\tsstart\tsend\tevalue\tbitscore" > find_results/SRR2239592.insertions_seqs_blast_results.tsv22
 blastx -query find_results/SRR2239592.insertions_seqs_blast.fa -db tsa_nr -outfmt "6 qseqid sseqid staxids sscinames scomnames sblastnames salltitles pident length mismatch gapopen qstart qend sstart send evalue bitscore"  >> find_results/SRR2239592.insertions_seqs_blast_results.tsv22
 
+
+
+# after getting diamond results. here's some processing stuff
+# compile all results
+rm all_results.tsv
+for i in $(ls SRR*.tsv); do tail -n +2 $i >> all_results.tsv; done
+cut -f 4 all_results.tsv | sort | uniq -c | sort -nr| head
+
+
+
+# Only top hit for each query in blast file
+awk '!x[$1]++' SRR4065643.insertions_seqs_diamond_results.tsv > SRR4065643.insertions_seqs_diamond_results_first.tsv
+
+# top IS1 results
+for i in $(ls *diamond*); do tail -n +2 $i | grep IS1 | awk '!x[$1]++' - >> top_IS1_results.txt; done
