@@ -11773,7 +11773,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># imports </span>
@@ -11781,6 +11781,9 @@ div#notebook {
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1"># now going to get records with entrez</span>
+<span class="kn">from</span> <span class="nn">Bio</span> <span class="k">import</span> <span class="n">Entrez</span>
+<span class="n">Entrez</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="s2">&quot;bsiranos@stanford.edu&quot;</span>
 </pre></div>
 
 </div>
@@ -11790,7 +11793,38 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>7291531
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[133]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get xml file here: https://www.ncbi.nlm.nih.gov/biosample/?term=antibiogram%5bfilter%5d</span>
@@ -11806,16 +11840,16 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[85]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># testing xml stuff... </span>
-<span class="k">if</span> <span class="kc">False</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]:</span>
+<span class="k">if</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
         <span class="nb">print</span> <span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="n">child</span><span class="o">.</span><span class="n">attrib</span><span class="p">)</span>
     
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s1">&#39;Table&#39;</span><span class="p">):</span>
-        <span class="n">xmltable_to_df</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="c1">#         xmltable_to_df(i)</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s1">&#39;Header&#39;</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">j</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
@@ -11825,10 +11859,40 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Id {&#39;db&#39;: &#39;BioSample&#39;, &#39;is_primary&#39;: &#39;1&#39;}
+Id {&#39;db_label&#39;: &#39;Sample name&#39;}
+Id {&#39;db&#39;: &#39;SRA&#39;}
+Antibiotic
+Resistance phenotype
+Measurement sign
+Measurement
+Measurement units
+Laboratory typing method
+Laboratory typing platform
+Vendor
+Laboratory typing method version or reagent
+Testing standard
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[125]:</div>
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
@@ -11863,7 +11927,7 @@ Id [&#39;SRA&#39;]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[148]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">parse_ncbi_xml</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
@@ -11932,11 +11996,57 @@ Id [&#39;SRA&#39;]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[149]:</div>
+<div class="prompt input_prompt">In&nbsp;[129]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get this big table</span>
-<span class="n">bigdf</span> <span class="o">=</span> <span class="n">parse_ncbi_xml</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">parse_ncbi_xml_single</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;return a table form parsing the single XML information</span>
+<span class="sd">    Each row of the table is an enry about resistance to antibiotics</span>
+<span class="sd">    for a single organism</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># basic sample information </span>
+    <span class="n">sample_id</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+    <span class="n">sample_accession</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;accession&#39;</span><span class="p">]</span>
+    <span class="n">taxonomy_name</span> <span class="o">=</span> <span class="n">root</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;taxonomy_name&#39;</span><span class="p">]</span>
+    <span class="n">sample_title</span> <span class="o">=</span> <span class="n">root</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+
+    <span class="c1"># check for sequencing data</span>
+    <span class="n">has_sra</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="s1">&#39;SRA&#39;</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+            <span class="n">has_sra</span> <span class="o">=</span><span class="kc">True</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">comment_text</span> <span class="o">=</span> <span class="n">root</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;Paragraph&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+        <span class="n">comment_text</span> <span class="o">=</span> <span class="s1">&#39;NA&#39;</span>
+    <span class="k">if</span> <span class="n">has_sra</span><span class="p">:</span>
+        <span class="c1"># add this to each row</span>
+        <span class="n">add_extra</span> <span class="o">=</span> <span class="p">[</span><span class="n">sample_id</span><span class="p">,</span> <span class="n">sample_accession</span><span class="p">,</span> <span class="n">sample_title</span><span class="p">,</span> <span class="n">taxonomy_name</span><span class="p">,</span> <span class="n">comment_text</span><span class="p">]</span>
+        <span class="n">add_extra_header</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sample_id&#39;</span><span class="p">,</span> <span class="s1">&#39;sample_accession&#39;</span><span class="p">,</span> <span class="s1">&#39;sample_title&#39;</span><span class="p">,</span> <span class="s1">&#39;taxonomy_name&#39;</span><span class="p">,</span> <span class="s1">&#39;comment_text&#39;</span><span class="p">]</span>
+        <span class="c1"># get resistance table</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">root</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;Table&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">table_title</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span>
+        <span class="n">table_header</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;Header&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getchildren</span><span class="p">()]</span> <span class="o">+</span> <span class="n">add_extra_header</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;Body&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getchildren</span><span class="p">()]</span>
+        <span class="n">table_text</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="n">row_text</span> <span class="o">=</span> <span class="p">[</span><span class="n">cell</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">getchildren</span><span class="p">()]</span> <span class="o">+</span> <span class="n">add_extra</span>
+            <span class="n">table_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row_text</span><span class="p">)</span>
+        <span class="n">table_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">table_text</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">table_header</span><span class="p">)</span>
+
+        <span class="c1"># standardize the columns in this </span>
+        <span class="c1"># we want the Antibiotic, Resistance phenotype, Measurement, Measurement sign, Measurement units</span>
+        <span class="c1"># columns. If theres not that, put NA</span>
+        <span class="n">keep_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Antibiotic&#39;</span><span class="p">,</span> <span class="s1">&#39;Resistance phenotype&#39;</span><span class="p">,</span> <span class="s1">&#39;Measurement&#39;</span><span class="p">,</span> <span class="s1">&#39;Measurement sign&#39;</span><span class="p">,</span> <span class="s1">&#39;Measurement units&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">add_extra_header</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keep_columns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">table_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="n">table_df</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;NA&#39;</span>
+        <span class="n">table_df</span> <span class="o">=</span> <span class="n">table_df</span><span class="p">[</span><span class="n">keep_columns</span><span class="p">]</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">table_df</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11946,10 +12056,611 @@ Id [&#39;SRA&#39;]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[150]:</div>
+<div class="prompt input_prompt">In&nbsp;[140]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">bigdf</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># takes in a list of sample identifiers </span>
+<span class="c1"># must be one column, in the format &#39;SAMN07291531&#39;</span>
+<span class="n">sample_id_file</span> <span class="o">=</span> <span class="s1">&#39;/home/ben/projects/meta-mustache/data/klebsiella_biosample_ids.txt&#39;</span>
+<span class="n">sample_ids</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">sample_id_file</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">klebsiella_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sample_ids</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">handle</span> <span class="o">=</span> <span class="n">Entrez</span><span class="o">.</span><span class="n">esearch</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="s1">&#39;biosample&#39;</span><span class="p">,</span> <span class="n">term</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">handle</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="n">id_number</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;IdList/Id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">Entrez</span><span class="o">.</span><span class="n">efetch</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="s1">&#39;biosample&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">id_number</span><span class="p">,</span> <span class="n">retmode</span><span class="o">=</span><span class="s1">&#39;xml&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="n">table_df</span> <span class="o">=</span> <span class="n">parse_ncbi_xml_single</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="n">klebsiella_df</span> <span class="o">=</span> <span class="n">klebsiella_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">table_df</span><span class="p">)</span>
+<span class="n">klebsiella_df</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;/home/ben/bhatt_local/meta-mustache/klebsiella_resistance_table.pickle&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>SAMN07291531
+SAMN07291519
+SAMN04014983
+SAMN04014920
+SAMN04014982
+SAMN04014994
+SAMN07291547
+SAMN07291505
+SAMN07450704
+SAMN07450703
+SAMN07450702
+SAMN07450701
+SAMN07450699
+SAMN07450698
+SAMN07450697
+SAMN07450696
+SAMN07450694
+SAMN07450693
+SAMN07450692
+SAMN07450691
+SAMN07450690
+SAMN07450682
+SAMN07450681
+SAMN07450680
+SAMN07450647
+SAMN07450646
+SAMN07450645
+SAMN07450640
+SAMN07450639
+SAMN07450638
+SAMN07450624
+SAMN07450623
+SAMN07450622
+SAMN07450621
+SAMN07450620
+SAMN07450619
+SAMN07450618
+SAMN07450608
+SAMN07450607
+SAMN07450603
+SAMN07450602
+SAMN07450601
+SAMN07450600
+SAMN07450592
+SAMN07450589
+SAMN07450588
+SAMN07450587
+SAMN07450586
+SAMN07450584
+SAMN07450583
+SAMN07450581
+SAMN07450577
+SAMN07450576
+SAMN07450575
+SAMN07450574
+SAMN07450573
+SAMN07450572
+SAMN07450567
+SAMN07450566
+SAMN07450565
+SAMN07450564
+SAMN07450563
+SAMN07450562
+SAMN07450561
+SAMN07450560
+SAMN07450559
+SAMN07450558
+SAMN07450557
+SAMN07450556
+SAMN07450555
+SAMN07450554
+SAMN07450553
+SAMN07450552
+SAMN07450551
+SAMN07203032
+SAMN07203030
+SAMN07203029
+SAMN07203013
+SAMN07203007
+SAMN07265011
+SAMN04014937
+SAMN04014921
+SAMN07291506
+SAMN07291504
+SAMN08045836
+SAMN08045835
+SAMN07450844
+SAMN07410714
+SAMN07410711
+SAMN07410710
+SAMN07410707
+SAMN07332515
+SAMN07332514
+SAMN07332513
+SAMN07332511
+SAMN07332510
+SAMN07325908
+SAMN07325906
+SAMN07325898
+SAMN07325896
+SAMN07325895
+SAMN07325893
+SAMN06754742
+SAMN06754741
+SAMN06754739
+SAMN06754730
+SAMN06680411
+SAMN06680409
+SAMN06680408
+SAMN06680399
+SAMN06680398
+SAMN06546425
+SAMN06546424
+SAMN06546423
+SAMN06311516
+SAMN06015668
+SAMN06015658
+SAMN05806176
+SAMN05806167
+SAMN05774083
+SAMN05774081
+SAMN05774073
+SAMN05510459
+SAMN05194535
+SAMN04456592
+SAMN04456590
+SAMN04393399
+SAMN04339715
+SAMN04339714
+SAMN04122809
+SAMN04096282
+SAMN04096279
+SAMN04096276
+SAMN03892126
+SAMN03892120
+SAMN03892119
+SAMN04014907
+SAMN04448249
+SAMN04448248
+SAMN04448247
+SAMN04448246
+SAMN02581253
+SAMN02581249
+SAMN02356598
+SAMN02581282
+SAMN02581241
+SAMN02138584
+SAMN02138580
+SAMN02138560
+SAMN04014993
+SAMN04014948
+SAMN04014989
+SAMN04014986
+SAMN04014980
+SAMN04014966
+SAMN04014961
+SAMN04014979
+SAMN04014967
+SAMN04014954
+SAMN04014984
+SAMN04014970
+SAMN04014999
+SAMN04014953
+SAMN04014888
+SAMN04014956
+SAMN04014909
+SAMN04014939
+SAMN04014958
+SAMN04015001
+SAMN04014987
+SAMN04014981
+SAMN04014976
+SAMN04014950
+SAMN04014947
+SAMN04014938
+SAMN04014928
+SAMN04014917
+SAMN04014916
+SAMN04014892
+SAMN04014890
+SAMN04014887
+SAMN04014885
+SAMN04014884
+SAMN04014883
+SAMN04014882
+SAMN04014881
+SAMN04014880
+SAMN04014875
+SAMN04014853
+SAMN04014851
+SAMN04014846
+SAMN04014845
+SAMN04014844
+SAMN02581391
+SAMN02138571
+SAMN05170347
+SAMN05170345
+SAMN05170344
+SAMN05170343
+SAMN05170342
+SAMN05170341
+SAMN05170340
+SAMN05170339
+SAMN05170330
+SAMN05170329
+SAMN05170325
+SAMN05170324
+SAMN05170322
+SAMN05170321
+SAMN05170316
+SAMN05170315
+SAMN05170313
+SAMN05170311
+SAMN05170310
+SAMN05170309
+SAMN05170308
+SAMN05170307
+SAMN05170306
+SAMN05170304
+SAMN05170266
+SAMN05170265
+SAMN05170264
+SAMN05170263
+SAMN05170258
+SAMN05170256
+SAMN05170255
+SAMN05170254
+SAMN05170253
+SAMN05170252
+SAMN05170251
+SAMN05170249
+SAMN05170248
+SAMN05170247
+SAMN05170246
+SAMN05170245
+SAMN05170244
+SAMN05170243
+SAMN05170242
+SAMN05170240
+SAMN05170239
+SAMN05170230
+SAMN05170226
+SAMN05170222
+SAMN05170221
+SAMN05170219
+SAMN05170218
+SAMN05170217
+SAMN05170216
+SAMN05170214
+SAMN05170211
+SAMN05170209
+SAMN05170201
+SAMN05170199
+SAMN05170197
+SAMN05170196
+SAMN05170195
+SAMN05170194
+SAMN05170193
+SAMN05170192
+SAMN05170191
+SAMN05170189
+SAMN05170188
+SAMN05170187
+SAMN05170186
+SAMN05170185
+SAMN05170182
+SAMN05170181
+SAMN05170180
+SAMN05170179
+SAMN05170178
+SAMN05170176
+SAMN05170175
+SAMN05170174
+SAMN05170173
+SAMN05170172
+SAMN05170171
+SAMN05170170
+SAMN05170158
+SAMN05170156
+SAMN04448219
+SAMN05170145
+SAMN05170144
+SAMN05170143
+SAMN05170141
+SAMN05170138
+SAMN05170137
+SAMN05170136
+SAMN05170135
+SAMN05170134
+SAMN05170133
+SAMN05170131
+SAMN05170129
+SAMN05170128
+SAMN05170125
+SAMN05170124
+SAMN05170123
+SAMN05170122
+SAMN05170121
+SAMN05170119
+SAMN05170118
+SAMN05170112
+SAMN05170111
+SAMN05170110
+SAMN05170109
+SAMN05170108
+SAMN05170107
+SAMN05170106
+SAMN05170105
+SAMN05170104
+SAMN05170103
+SAMN05170102
+SAMN05170101
+SAMN05170098
+SAMN05170095
+SAMN05170088
+SAMN05170084
+SAMN05170082
+SAMN05170077
+SAMN05170076
+SAMN05170075
+SAMN05170064
+SAMN05170062
+SAMN05170061
+SAMN05170058
+SAMN05170057
+SAMN05170055
+SAMN04448245
+SAMN04448244
+SAMN04448243
+SAMN04448241
+SAMN04448240
+SAMN04448239
+SAMN04448238
+SAMN04448237
+SAMN04448236
+SAMN04448235
+SAMN04448234
+SAMN04448233
+SAMN04448231
+SAMN04448230
+SAMN04448229
+SAMN04448228
+SAMN04448227
+SAMN04448226
+SAMN04448225
+SAMN04448224
+SAMN04448223
+SAMN04448222
+SAMN04448221
+SAMN04448220
+SAMN04514124
+SAMN04514123
+SAMN04514122
+SAMN04514121
+SAMN04514120
+SAMN04514119
+SAMN02142014
+SAMN02141983
+SAMN02141981
+SAMN02141972
+SAMN02142051
+SAMN02142050
+SAMN02142049
+SAMN02142048
+SAMN02142047
+SAMN02142044
+SAMN02142043
+SAMN02142042
+SAMN02142041
+SAMN02142029
+SAMN02142028
+SAMN02142027
+SAMN02142026
+SAMN02142023
+SAMN02142022
+SAMN02142021
+SAMN02142020
+SAMN02142019
+SAMN02142018
+SAMN02142017
+SAMN02142016
+SAMN02142015
+SAMN02142001
+SAMN02142000
+SAMN02141996
+SAMN02141995
+SAMN02141994
+SAMN02141993
+SAMN02141992
+SAMN02141991
+SAMN02141990
+SAMN02141989
+SAMN02141988
+SAMN02141987
+SAMN02141986
+SAMN02141985
+SAMN02141984
+SAMN02141982
+SAMN02141980
+SAMN02141979
+SAMN02141978
+SAMN02141977
+SAMN02141976
+SAMN02141975
+SAMN02141974
+SAMN02141973
+SAMN02141971
+SAMN02141970
+SAMN02141969
+SAMN02141968
+SAMN02141967
+SAMN02141966
+SAMN02141705
+SAMN02581398
+SAMN02581397
+SAMN02581396
+SAMN02581395
+SAMN02581392
+SAMN02581384
+SAMN02581383
+SAMN02581290
+SAMN02581289
+SAMN02581281
+SAMN02581276
+SAMN02581275
+SAMN02581274
+SAMN02581273
+SAMN02581270
+SAMN02581269
+SAMN02581268
+SAMN02581267
+SAMN02581266
+SAMN02581265
+SAMN02581262
+SAMN02581261
+SAMN02581252
+SAMN02581248
+SAMN02581247
+SAMN02581246
+SAMN02581245
+SAMN02581244
+SAMN02581243
+SAMN02581242
+SAMN02581240
+SAMN02356624
+SAMN02356623
+SAMN02356622
+SAMN02356621
+SAMN02356618
+SAMN02356617
+SAMN02356614
+SAMN02356613
+SAMN02356606
+SAMN02356605
+SAMN02356602
+SAMN02356601
+SAMN02356600
+SAMN02356599
+SAMN02356597
+SAMN02356594
+SAMN02356593
+SAMN02356592
+SAMN02356591
+SAMN02356587
+SAMN02356586
+SAMN02356585
+SAMN02356584
+SAMN02356580
+SAMN02356579
+SAMN02138672
+SAMN02138671
+SAMN02138667
+SAMN02138666
+SAMN02138665
+SAMN02138663
+SAMN02138662
+SAMN02138661
+SAMN02138655
+SAMN02138654
+SAMN02138653
+SAMN02138652
+SAMN02138651
+SAMN02138645
+SAMN02138644
+SAMN02138643
+SAMN02138642
+SAMN02138639
+SAMN02138637
+SAMN02138635
+SAMN02138634
+SAMN02138633
+SAMN02138628
+SAMN02138627
+SAMN02138625
+SAMN02138624
+SAMN02138621
+SAMN02138620
+SAMN02138603
+SAMN02138599
+SAMN02138591
+SAMN02138590
+SAMN02138589
+SAMN02138588
+SAMN02138587
+SAMN02138586
+SAMN02138585
+SAMN02138583
+SAMN02138579
+SAMN02138576
+SAMN02138575
+SAMN02138572
+SAMN02138570
+SAMN02138569
+SAMN02138561
+SAMN02138559
+SAMN02138558
+SAMN02138557
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[123]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># for child in root:</span>
+<span class="c1">#     print (child.tag, child.attrib)</span>
+<span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="n">child</span><span class="o">.</span><span class="n">attrib</span><span class="p">,</span> <span class="n">child</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="c1"># for child in root:</span>
+<span class="c1">#     print (child.tag, child.attrib)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Id {&#39;db&#39;: &#39;BioSample&#39;, &#39;is_primary&#39;: &#39;1&#39;} SAMN07291531
+Id {&#39;db_label&#39;: &#39;Sample name&#39;} AR_0438
+Id {&#39;db&#39;: &#39;SRA&#39;} SRS3159753
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[134]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bigdf</span> <span class="o">=</span> <span class="n">parse_ncbi_xml</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bigdf</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="c1"># rename the columns</span>
 <span class="n">bigdf</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;antibiotic&#39;</span><span class="p">,</span> <span class="s1">&#39;resistance_phenotype&#39;</span><span class="p">,</span> <span class="s1">&#39;measurement&#39;</span><span class="p">,</span> <span class="s1">&#39;measurement_sign&#39;</span><span class="p">,</span>
                  <span class="s1">&#39;measurement_units&#39;</span><span class="p">,</span> <span class="s1">&#39;sample_id&#39;</span><span class="p">,</span> <span class="s1">&#39;sample_title&#39;</span><span class="p">,</span> <span class="s1">&#39;taxonomy_name&#39;</span><span class="p">,</span> <span class="s1">&#39;organism_name&#39;</span><span class="p">,</span> <span class="s1">&#39;comment_text&#39;</span><span class="p">]</span>
@@ -11982,7 +12693,7 @@ Id [&#39;SRA&#39;]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[151]:</div>
+<div class="prompt input_prompt">In&nbsp;[102]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">bigdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;/home/ben/bhatt_local/meta-mustache/resistance_table.pickle&#39;</span><span class="p">)</span>
@@ -12006,6 +12717,865 @@ Id [&#39;SRA&#39;]
 <pre>(76318, 10)
 </pre>
 </div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[137]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bigdf</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[137]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>antibiotic</th>
+      <th>resistance_phenotype</th>
+      <th>measurement</th>
+      <th>measurement_sign</th>
+      <th>measurement_units</th>
+      <th>sample_id</th>
+      <th>sample_title</th>
+      <th>taxonomy_name</th>
+      <th>organism_name</th>
+      <th>comment_text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>amikacin</td>
+      <td>resistant</td>
+      <td>64</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ampicillin</td>
+      <td>resistant</td>
+      <td>32</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>aztreonam</td>
+      <td>resistant</td>
+      <td>64</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>cefazolin</td>
+      <td>resistant</td>
+      <td>8</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>cefepime</td>
+      <td>resistant</td>
+      <td>32</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>cefotaxime</td>
+      <td>resistant</td>
+      <td>64</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>cefotaxime-clavulanic acid</td>
+      <td>not defined</td>
+      <td>32/4</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>cefoxitin</td>
+      <td>resistant</td>
+      <td>16</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>ceftazidime</td>
+      <td>resistant</td>
+      <td>128</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>ceftazidime-clavulanic acid</td>
+      <td>not defined</td>
+      <td>64/4</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>ceftriaxone</td>
+      <td>resistant</td>
+      <td>32</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>chloramphenicol</td>
+      <td>resistant</td>
+      <td>16</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>ciprofloxacin</td>
+      <td>resistant</td>
+      <td>8</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>colistin</td>
+      <td>not defined</td>
+      <td>8</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>doripenem</td>
+      <td>resistant</td>
+      <td>8</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>ertapenem</td>
+      <td>resistant</td>
+      <td>8</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>fosfomycin</td>
+      <td>not defined</td>
+      <td>16</td>
+      <td>==</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>fosfomycin</td>
+      <td>not defined</td>
+      <td>32</td>
+      <td>==</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>gentamicin</td>
+      <td>resistant</td>
+      <td>16</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>imipenem</td>
+      <td>resistant</td>
+      <td>32</td>
+      <td>==</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>levofloxacin</td>
+      <td>resistant</td>
+      <td>8</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>meropenem</td>
+      <td>resistant</td>
+      <td>8</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>piperacillin-tazobactam</td>
+      <td>resistant</td>
+      <td>128/4</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>polymyxin B</td>
+      <td>not defined</td>
+      <td>8</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>tetracycline</td>
+      <td>resistant</td>
+      <td>32</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>tigecycline</td>
+      <td>intermediate</td>
+      <td>4</td>
+      <td>==</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>tobramycin</td>
+      <td>resistant</td>
+      <td>16</td>
+      <td>&gt;</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>trimethoprim-sulfamethoxazole</td>
+      <td>resistant</td>
+      <td>8/152</td>
+      <td>==</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>ceftazidime-avibactam</td>
+      <td>resistant</td>
+      <td>16/4</td>
+      <td>==</td>
+      <td>mg/L</td>
+      <td>7265011</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>Klebsiella pneumoniae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>amikacin</td>
+      <td>susceptible</td>
+      <td>4</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>5194390</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Escherichia coli</td>
+      <td>Escherichia coli</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>gentamicin</td>
+      <td>resistant</td>
+      <td>16</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>4622917</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Escherichia coli</td>
+      <td>Escherichia coli</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>levofloxacin</td>
+      <td>resistant</td>
+      <td>8</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>4622917</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Escherichia coli</td>
+      <td>Escherichia coli</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>nitrofurantoin</td>
+      <td>susceptible</td>
+      <td>16</td>
+      <td>&lt;=</td>
+      <td>mg/L</td>
+      <td>4622917</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Escherichia coli</td>
+      <td>Escherichia coli</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>piperacillin-tazobactam</td>
+      <td>resistant</td>
+      <td>128/4</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>4622917</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Escherichia coli</td>
+      <td>Escherichia coli</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>tobramycin</td>
+      <td>resistant</td>
+      <td>16</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>4622917</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Escherichia coli</td>
+      <td>Escherichia coli</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>tetracycline</td>
+      <td>susceptible</td>
+      <td>2</td>
+      <td>==</td>
+      <td>mg/L</td>
+      <td>4622917</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Escherichia coli</td>
+      <td>Escherichia coli</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>trimethoprim-sulfamethoxazole</td>
+      <td>resistant</td>
+      <td>16/304</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>4622917</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Escherichia coli</td>
+      <td>Escherichia coli</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>meropenem</td>
+      <td>resistant</td>
+      <td>16</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>4622917</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Escherichia coli</td>
+      <td>Escherichia coli</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>amikacin</td>
+      <td>susceptible</td>
+      <td>16</td>
+      <td>==</td>
+      <td>mg/L</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>amoxicillin-clavulanic acid</td>
+      <td>resistant</td>
+      <td>32/16</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>cefazolin</td>
+      <td>resistant</td>
+      <td>64</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>cefepime</td>
+      <td>resistant</td>
+      <td>64</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>cefoxitin</td>
+      <td>resistant</td>
+      <td>64</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>ceftazidime</td>
+      <td>resistant</td>
+      <td>64</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>ceftriaxone</td>
+      <td>resistant</td>
+      <td>64</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>ciprofloxacin</td>
+      <td>resistant</td>
+      <td>4</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>gentamicin</td>
+      <td>resistant</td>
+      <td>16</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>levofloxacin</td>
+      <td>resistant</td>
+      <td>8</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>piperacillin-tazobactam</td>
+      <td>resistant</td>
+      <td>128/4</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>tobramycin</td>
+      <td>resistant</td>
+      <td>16</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>tetracycline</td>
+      <td>susceptible</td>
+      <td>4</td>
+      <td>==</td>
+      <td>mg/L</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>trimethoprim-sulfamethoxazole</td>
+      <td>resistant</td>
+      <td>16/304</td>
+      <td>&gt;=</td>
+      <td>mg/L</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>meropenem</td>
+      <td>resistant</td>
+      <td>8</td>
+      <td>==</td>
+      <td>mg/L</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>tetracycline</td>
+      <td>susceptible</td>
+      <td>19</td>
+      <td>==</td>
+      <td>mm</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>chloramphenicol</td>
+      <td>resistant</td>
+      <td>6</td>
+      <td>==</td>
+      <td>mm</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>colistin</td>
+      <td>susceptible</td>
+      <td>12</td>
+      <td>==</td>
+      <td>mm</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>sulfamethoxazole</td>
+      <td>resistant</td>
+      <td>6</td>
+      <td>==</td>
+      <td>mm</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>tobramycin</td>
+      <td>resistant</td>
+      <td>6</td>
+      <td>==</td>
+      <td>mm</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>ciprofloxacin</td>
+      <td>resistant</td>
+      <td>6</td>
+      <td>==</td>
+      <td>mm</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>cephalothin</td>
+      <td>resistant</td>
+      <td>6</td>
+      <td>==</td>
+      <td>mm</td>
+      <td>4456586</td>
+      <td>Pathogen: clinical or host-associated sample f...</td>
+      <td>Enterobacter cloacae</td>
+      <td>Enterobacter cloacae</td>
+      <td>NA</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 10 columns</p>
+</div>
+</div>
+
 </div>
 
 </div>
@@ -14255,6 +15825,19 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[141]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">klebsiella_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;/home/ben/bhatt_local/meta-mustache/klebsiella_resistance_table.tsv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span> <span class="p">)</span>
+</pre></div>
+
+</div>
 </div>
 </div>
 
